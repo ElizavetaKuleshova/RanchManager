@@ -169,7 +169,11 @@ async def on_ready():
 @bot.event
 async def setup_hook():
     bot.add_view(StockView())
-    await bot.tree.sync()
+
+    guild = discord.Object(id=1554839201017757768)
+    bot.tree.copy_global_to(guild=guild)
+    synced = await bot.tree.sync(guild=guild)
+    print(f'Команды зарегистрированы: {len(synced)}')
 
 
 def admin_only(interaction):
