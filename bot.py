@@ -12,7 +12,8 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 ALLOWED_ROLES = {'с РанЧо', '!Человек с метлой!'}
-DB = Path(__file__).with_name('ranch.db')
+DB = Path(os.getenv('DATA_DIR', str(Path(__file__).parent))) / 'ranch.db'
+DB.parent.mkdir(parents=True, exist_ok=True)
 INITIAL = [
     ('Пшено',773,650),('Сахарный тростник',513,500),('Сахар',294,500),
     ('Мука',205,200),('Тысячелистник',650,650),('Женьшень Аляскинский',502,500),
