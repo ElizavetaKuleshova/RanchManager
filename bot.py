@@ -173,7 +173,13 @@ async def setup_hook():
 
 
 def admin_only(interaction):
-    return isinstance(interaction.user, discord.Member) and interaction.user.guild_permissions.administrator
+    return (
+        isinstance(interaction.user, discord.Member)
+        and (
+            interaction.user.guild_permissions.administrator
+            or any(role.name == '!Человек с метлой!' for role in interaction.user.roles)
+        )
+    )
 
 
 @bot.tree.command(name='запустить_запасы', description='Создать или обновить главное сообщение запасов')
